@@ -14,7 +14,12 @@ exports.CASE_SENSITIVE_FS = CASE_SENSITIVE_FS;
 
 const ERROR_NAME = 'EslintPluginImportResolveError';
 
-const fileExistsCache = new ModuleCache();
+let fileExistsCache = new ModuleCache();
+
+// reset fileExistsCache every 3 hours
+setInterval(() => {
+  fileExistsCache  = new ModuleCache()
+}, 3 * 60 * 60 * 1000)
 
 // Polyfill Node's `Module.createRequireFromPath` if not present (added in Node v10.12.0)
 // Use `Module.createRequire` if available (added in Node v12.2.0)
