@@ -23,8 +23,14 @@ let ts;
 
 const log = debug('eslint-plugin-import:ExportMap');
 
-const exportCache = new Map();
-const tsConfigCache = new Map();
+let exportCache = new Map();
+let tsConfigCache = new Map();
+
+// reset exportCache and tsConfigCache 3 hours
+setInterval(() => {
+  exportCache = new Map();;
+  tsConfigCache = new Map();
+}, 3 * 60 * 60 * 1000)
 
 export default class ExportMap {
   constructor(path) {
